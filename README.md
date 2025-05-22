@@ -7,9 +7,9 @@ This repository provides a Python-based solver for the **1D Richards Equation** 
 
 The water content form of the 1D Richards equation solved is:
 
-\[
+\begin{equation}
 C(h) \frac{\partial h}{\partial t} = \frac{\partial}{\partial z} \left[ K(h) \left( \frac{\partial h}{\partial z} + 1 \right) \right]
-\]
+\end{equation}
 
 Where:
 
