@@ -24,7 +24,7 @@ The water retention and hydraulic conductivity functions follow the **Van Genuch
 
 - Nonlinear soil moisture dynamics simulation.
 - Van Genuchten parameterization:
-  - \( \alpha = 7.5 \)
+  - $\alpha = 7.5$
   - \( n = 1.89 \)
   - \( m = 1 - 1/n \)
   - \( \theta_s = 0.41 \)
