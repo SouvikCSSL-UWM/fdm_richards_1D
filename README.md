@@ -1,4 +1,4 @@
-# fdm_richards_1D
+# Finite Difference Solution of 1D Richardson-Richard's Equation using Picard Iteration
 Finite difference solution of 1D Richards' equation (head-based) using Picard iteration. Backward Euler for time, central difference for space, and Crank–Nicolson scheme for diffusion and advection. Includes multiple initial conditions and supports unsaturated soil flow simulations.
 
 This repository provides a Python-based solver for the **1D Richards Equation** in unsaturated soils, employing the **Van Genuchten model** for soil hydraulic properties. The solver uses **finite difference methods** with **Picard iteration** and supports **two types of boundary conditions**: constant head and constant flux.
@@ -7,16 +7,15 @@ This repository provides a Python-based solver for the **1D Richards Equation** 
 
 The water content form of the 1D Richards equation solved is:
 
-\begin{equation}
-C(h) \frac{\partial h}{\partial t} = \frac{\partial}{\partial z} \left[ K(h) \left( \frac{\partial h}{\partial z} + 1 \right) \right]
-\end{equation}
+
+$C(h) \frac{\partial h}{\partial t} = \frac{\partial}{\partial z} \left[ K(h) \left( \frac{\partial h}{\partial z} + 1 \right) \right]$
 
 Where:
 
-- \( h \): Pressure head [m]  
-- \( \theta \): Volumetric water content  
-- \( K(h) \): Unsaturated hydraulic conductivity [m/s]  
-- \( C(h) \): Specific moisture capacity [1/m]
+- $h$: Pressure head [m]  
+- $\theta$: Volumetric water content  
+- $K(h)$: Unsaturated hydraulic conductivity [m/s]  
+- $C(h)$: Specific moisture capacity [1/m]
 
 The water retention and hydraulic conductivity functions follow the **Van Genuchten** model.
 
@@ -25,11 +24,11 @@ The water retention and hydraulic conductivity functions follow the **Van Genuch
 - Nonlinear soil moisture dynamics simulation.
 - Van Genuchten parameterization:
   - $\alpha = 7.5$
-  - \( n = 1.89 \)
-  - \( m = 1 - 1/n \)
-  - \( \theta_s = 0.41 \)
-  - \( \theta_r = 0.065 \)
-  - \( K_s = 1.06 \times 10^{-4} \, \text{m/s} \)
+  - $n = 1.89$
+  - $m = 1 - \frac{1}{n}$
+  - $\theta_s = 0.41$
+  - $\theta_r = 0.065$
+  - $K_s = 1.06 \times 10^{-4} \text{m/s}$
 - Time integration using Picard iterations.
 - Supports:
   - **Constant Head (Dirichlet)** boundary condition.
