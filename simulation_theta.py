@@ -1,5 +1,3 @@
-# Finite Difference Scheme with Picard Iteration for 1D Richardson-Richard's Equation
-# Author: Souvik Roy, Roshan M. D'souza
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
@@ -20,6 +18,7 @@ T = 1000*dt
 Nt = int(T / dt)  # Number of time steps
 
 x = np.linspace(0, L, int(L/dx) + 1)
+ghost_point = L+dx/2
 
 # Theta to head
 def head(Theta):
@@ -82,12 +81,28 @@ def Picard_iteration(h0,max_iter=10000, tol=1e-4):
         A = np.zeros([h.shape[0],h.shape[0]])
         b = np.zeros([h.shape[0]])
 
-        A[-1,-2] = 0
-        A[-1,-1] = 1
-        b[-1] = 0
-        A[0,0] = 1
+        # A[-1,-2] = 0
+        # A[-1,-1] = 1
+        # b[-1] = 0 
+        # qv = -(K(ghost_point)+K(h_old[-1])/2)*((ghost_point - h_old[-1])/(dx/2)) - (K(ghost_point)+K(h_old[-1])/2)
+        # #qv = 0
+        # A[-1,-2] = - (K(h_old[-1]+K(h_old[-2]))/2)/dx**2
+        # A[-1,-1] = C(h_old[-1])/dt + (K(h_old[-1]+K(h_old[-2]))/2)/dx**2
+        # b[-1] = h_old[-2]*(K(h_old[-1]+K(h_old[-2]))/2)/dx**2 - h_old[-1]*((C(h_old[-1])/dt) + (K(h_old[-1]+K(h_old[-2]))/2)/dx**2) - (K(h_old[-1]+K(h_old[-2]))/2)/dx + h_old[-1]*C(h_old[-2])/dt - qv/dx
+        K_half = (K(h_old[-1]) + K(h_old[-2])) / 2
+        C_N = C(h_old[-1])
+        q_B = -1e-6  # or any constant flux you want to apply
+
+        A[-1, -2] = -K_half / dx**2
+        A[-1, -1] = C_N / dt + K_half / dx**2
+
+        b[-1] = (h_old[-2] * K_half / dx**2
+                - h_old[-1] * (C_N / dt + K_half / dx**2)
+                + h_old_n[-1] * (C_N / dt)
+                - q_B / dx)
         A[0,1] = 0
-        b[0] = 0     
+        b[0] = 0
+        A[0,0] = 1   
         C_i = C(h_old)
         for i in range(1,x.shape[0]-1):
             K_plus = (K(h_old[i])+K(h_old[i+1]))/2.0
