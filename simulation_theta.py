@@ -1,3 +1,5 @@
+# Finite Difference Scheme with Picard Iteration for 1D Richardson-Richard's Equation
+# Author: Souvik Roy, Roshan M. D'souza
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
